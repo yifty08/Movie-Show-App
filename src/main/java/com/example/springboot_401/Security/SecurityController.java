@@ -1,4 +1,4 @@
-package com.example.springboot_401;
+package com.example.springboot_401.Security;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import javax.validation.Valid;
 
 @Controller
-public class HomeController {
+public class SecurityController {
     @Autowired
     private UserService userService;
 
@@ -22,7 +22,7 @@ public class HomeController {
             model.addAttribute("user_id", userService.getUser().getId());
             model.addAttribute("user", userService.getUser());
         }
-        return "index";
+        return "list";
     }
 
     @GetMapping("/register")

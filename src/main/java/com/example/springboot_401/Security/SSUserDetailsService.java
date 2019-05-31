@@ -1,4 +1,4 @@
-package com.example.springboot_401;
+package com.example.springboot_401.Security;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

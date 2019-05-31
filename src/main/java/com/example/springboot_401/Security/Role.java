@@ -1,4 +1,4 @@
-package com.example.springboot_401;
+package com.example.springboot_401.Security;
 
 import javax.persistence.*;
 import java.util.Collection;
