@@ -1,4 +1,4 @@
-package com.example.springboot_401.Security;
+package com.example.springboot_401;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -16,18 +16,16 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        roleRepository.save(new Role("USER"));
-        roleRepository.save(new Role("ADMIN"));
+        roleRepository.save(new Role("AUTHOR"));
 
-        Role adminRole = roleRepository.findByRole("ADMIN");
-        Role userRole = roleRepository.findByRole("USER");
+        Role authorRole = roleRepository.findByRole("AUTHOR");
 
         User user = new User("jim@jim.com", "password", "Jim", "Jimmerson", true, "jim");
-        user.setRoles(Arrays.asList(userRole));
+        user.setRoles(Arrays.asList(authorRole));
         userRepository.save(user);
 
         user = new User("admin@admin.com", "password", "Admin", "User", true, "admin");
-        user.setRoles(Arrays.asList(adminRole));
+        user.setRoles(Arrays.asList(authorRole));
         userRepository.save(user);
     }
 }

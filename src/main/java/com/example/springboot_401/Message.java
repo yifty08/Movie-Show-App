@@ -1,4 +1,4 @@
-package com.example.springboot_401.Bullhorn;
+package com.example.springboot_401;
 
 import org.springframework.lang.NonNull;
 
@@ -28,6 +28,8 @@ public class Message {
     private String postedBy;
 
     private String imageUrl;
+
+    private long authorId;
 
     public long getId() {
         return id;
@@ -75,5 +77,13 @@ public class Message {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public long getAuthorId() {
+        return authorId;
+    }
+
+    public void setAuthorId(long authorId) {
+        this.authorId = authorId;
     }
 }

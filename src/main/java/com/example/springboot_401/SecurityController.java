@@ -1,4 +1,4 @@
-package com.example.springboot_401.Security;
+package com.example.springboot_401;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,15 +16,6 @@ public class SecurityController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
-    public String index(Model model){
-        if(userService.getUser() != null){
-            model.addAttribute("user_id", userService.getUser().getId());
-            model.addAttribute("user", userService.getUser());
-        }
-        return "list";
-    }
-
     @GetMapping("/register")
     public String showRegistrationPage(Model model){
         model.addAttribute("user", new User());
@@ -38,7 +29,7 @@ public class SecurityController {
         if (result.hasErrors()){
             return "registration";
         }else{
-            userService.saveUser(user, "USER");
+            userService.saveUser(user, "AUTHOR");
             model.addAttribute("message", "User Account Created");
         }
         return "redirect:/login";

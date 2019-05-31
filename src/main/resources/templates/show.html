@@ -8,10 +8,7 @@
 </head>
 <body>
 <div class="container">
-    <nav class="nav nav-tabs 3">
-        <a href="/" class="nav-link">All Messages</a>
-        <a href="/add" class="nav-link">Add a Message</a><br/>
-    </nav>
+    <nav th:replace="base :: navi"></nav>
     <div th:object="${message}" class="card">
         <img th:src="*{imageUrl}" class="card-img-top"/>
         <div class="card-body">

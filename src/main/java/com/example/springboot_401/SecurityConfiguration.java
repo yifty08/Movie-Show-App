@@ -1,4 +1,4 @@
-package com.example.springboot_401.Security;
+package com.example.springboot_401;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -11,7 +11,6 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
-import sun.security.util.Password;
 
 @Configuration
 @EnableWebSecurity
@@ -20,9 +19,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-    @Autowired
-    private SSUserDetailsService userDetailsService;
 
     @Autowired
     private UserRepository userRepository;
@@ -35,7 +31,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/", "/h2-console/**", "/register").permitAll()
+                .antMatchers("/register").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").permitAll()

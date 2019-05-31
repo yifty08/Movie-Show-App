@@ -5,6 +5,11 @@
     <title>Base Page</title>
 </head>
 <body>
-
+<nav th:fragment="navi" class="nav nav-tabs">
+    <a href="/profile" class="nav-link"><strong>[[${user.firstName}]]</strong></a>
+    <a href="/" class="nav-link active">All Messages</a>
+    <a href="/add" class="nav-link">Add a Message</a><br/>
+    <a href="/logout" class="nav-link ml-auto"><strong>Logout</strong></a>
+</nav>
 </body>
 </html>

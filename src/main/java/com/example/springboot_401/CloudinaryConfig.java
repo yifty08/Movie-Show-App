@@ -1,4 +1,4 @@
-package com.example.springboot_401.Bullhorn;
+package com.example.springboot_401;
 
 import com.cloudinary.Cloudinary;
 import com.cloudinary.Singleton;
