@@ -8,11 +8,13 @@
 </head>
 <body>
 <nav th:fragment="navi" class="nav nav-tabs p-3" id="navbar">
+    <img src="https://res.cloudinary.com/dn5oij7hb/image/upload/v1559594918/BullhornImg.png"
+         class="nav-item mr-auto"/>
     <a href="/profile" class="nav-link"  sec:authorize="isAuthenticated()"><strong>[[${user.firstName}]]</strong></a>
     <a href="/" class="nav-link">All Messages</a>
     <a href="/add" class="nav-link" sec:authorize="isAuthenticated()">Add a Message</a>
-    <span class=" nav-link ml-auto" sec:authorize="isAnonymous()">
-        <a href="/register">Register</a> | <a href="/login"  >Log In</a>
+    <span class=" nav-link" sec:authorize="isAnonymous()">
+        <a href="/register">Register</a> | <a href="/login">Log In</a>
     </span>
     <a href="/logout" class="nav-link ml-auto" sec:authorize="isAuthenticated()"><strong>Logout</strong></a>
 </nav>
