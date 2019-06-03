@@ -16,7 +16,7 @@
     <span class=" nav-link" sec:authorize="isAnonymous()">
         <a href="/register">Register</a> | <a href="/login">Log In</a>
     </span>
-    <a href="/logout" class="nav-link ml-auto" sec:authorize="isAuthenticated()"><strong>Logout</strong></a>
+    <a href="/logout" class="nav-link" sec:authorize="isAuthenticated()"><strong>Logout</strong></a>
 </nav>
 </body>
 </html>
