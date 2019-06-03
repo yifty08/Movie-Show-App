@@ -15,8 +15,10 @@
             <h2 th:text="*{title}" class="card-title"></h2>
             <span th:inline="text" class="card-subtitle mb-2 text-muted">Posted On: [[${message.postedDate}]] Posted By: [[${message.postedBy}]]</span><br/>
             <p th:text="*{content}" class="card-text"></p>
-            <a th:href="@{/update/{id}(id=${message.id})}" class="btn btn-secondary">Update</a>
-            <a th:href="@{/delete/{id}(id=${message.id})}" class="btn btn-danger">Delete</a>
+            <span th:if="${user.id == message.authorId}">
+                <a class="btn btn-secondary" th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                <a class="btn btn-danger" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+            </span>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

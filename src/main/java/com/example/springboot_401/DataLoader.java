@@ -22,10 +22,12 @@ public class DataLoader implements CommandLineRunner {
 
         User user = new User("jim@jim.com", "password", "Jim", "Jimmerson", true, "jim");
         user.setRoles(Arrays.asList(authorRole));
+        user.setProfileImg("https://res.cloudinary.com/dn5oij7hb/image/upload/v1557710793/avatar-man-glasses-512.png");
         userRepository.save(user);
 
         user = new User("admin@admin.com", "password", "Admin", "User", true, "admin");
         user.setRoles(Arrays.asList(authorRole));
+        user.setProfileImg("https://res.cloudinary.com/dn5oij7hb/image/upload/v1557710793/avatar-man-glasses-512.png");
         userRepository.save(user);
     }
 }

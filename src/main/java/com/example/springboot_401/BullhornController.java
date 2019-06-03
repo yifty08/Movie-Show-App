@@ -46,8 +46,8 @@ public class BullhornController {
         if(result.hasErrors()){
             return "messageform";
         }
-        if(file.isEmpty()){
-            return "redirect:/add";
+        if(file.isEmpty() && message.getImageUrl().isEmpty()){
+            message.setImageUrl("https://res.cloudinary.com/dn5oij7hb/image/upload/v1559574176/Not_available.jpg");
         }
         try{
             Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
@@ -88,6 +88,15 @@ public class BullhornController {
         model.addAttribute("messages", messageRepository.findAllByAuthorId(userService.getUser().getId()));
         return "profile";
     }
+
+    @RequestMapping("/profile/{id}")
+    public String loadProfile(@PathVariable("id") long id, Model model){
+        model.addAttribute("user", userService.getUser());
+        model.addAttribute("profileUser", userService.userRepository.findById(id).get());
+        model.addAttribute("messages", messageRepository.findAllByAuthorId(id));
+        return "userprofile";
+    }
+
 
     public String getCurrentTime(){
         DateTimeFormatter dtf = DateTimeFormatter.ofPattern("MM/dd/yyyy");

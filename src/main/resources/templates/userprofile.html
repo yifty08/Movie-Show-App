@@ -2,14 +2,18 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
-    <title>All Messages</title>
+    <title>[[${user.firstName}]]'s Profile</title>
     <link rel="stylesheet" href="css/styles.css"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<nav th:replace="base :: navi"></nav>
 <div class="container">
+    <nav th:replace="base :: navi"></nav>
+    <div class="jumbotron text-center">
+        <img th:src="${profileUser.profileImg}" class="img-thumbnail" width="200px" height="200px"/>
+        <h2 th:inline="text">[[${profileUser.firstName}]] [[${profileUser.lastName}]]</h2>
+    </div>
     <div class="row mt-3" th:each="message : ${messages}">
         <div class="col-3"></div>
         <div class="col-6">
@@ -19,10 +23,9 @@
                     <h5 class="card-title" th:text="${message.title}"></h5>
                     <p class="card-text" th:text="${message.content}"></p>
                     <a class="btn btn-secondary" th:href="@{/view/{id}(id=${message.id})}">View</a>
-
-                    <span sec:authorize="isAuthenticated()">
-                        <a class="btn btn-secondary" th:if="${user.id == message.authorId}" th:href="@{/update/{id}(id=${message.id})}">Update</a>
-                        <a class="btn btn-danger" th:if="${user.id == message.authorId}" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                    <span th:if="${user.id == message.authorId}">
+                        <a class="btn btn-secondary" th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                        <a class="btn btn-danger" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
                     </span>
                 </div>
                 <div class="card-footer text-muted pt-2">
@@ -36,7 +39,6 @@
         <div class="col-3"></div>
     </div>
 </div>
-
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

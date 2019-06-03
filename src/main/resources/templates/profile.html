@@ -10,26 +10,34 @@
 <body>
 <div class="container">
     <nav th:replace="base :: navi"></nav>
-    <table class="table table-hover">
-        <thead class="thead-dark">
-        <th scope="col">Title</th>
-        <th scope="col">Posted On</th>
-        <th scope="col">Posted By</th>
-        <th scope="col">Actions</th>
-        </thead>
-        <tr th:each="message: ${messages}" scope="row">
-            <td th:text="${message.title}"></td>
-            <td th:text="${message.postedDate}"></td>
-            <td th:text="${message.postedBy}"></td>
-            <td>
-                <a class="btn btn-secondary" th:href="@{/view/{id}(id=${message.id})}">View</a>
-                <span sec:authorize="isAuthenticated() && hasAuthority('AUTHOR')">
-                    <a class="btn btn-secondary" th:href="@{/update/{id}(id=${message.id})}">Update</a>
-                    <a class="btn btn-danger" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
-                </span>
-            </td>
-        </tr>
-    </table>
+    <div class="jumbotron text-center">
+        <img th:src="${user.profileImg}" class="img-thumbnail" width="200px" height="200px"/>
+        <h2 th:inline="text">[[${user.firstName}]] [[${user.lastName}]]</h2>
+    </div>
+    <div class="row mt-3" th:each="message : ${messages}">
+        <div class="col-3"></div>
+        <div class="col-6">
+            <div class="card" style="width: 100%;">
+                <img th:src="${message.imageUrl}" class="card-img-top" alt="image of message">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${message.title}"></h5>
+                    <p class="card-text" th:text="${message.content}"></p>
+                    <a class="btn btn-secondary" th:href="@{/view/{id}(id=${message.id})}">View</a>
+                    <span th:if="${user.id == message.authorId}">
+                        <a class="btn btn-secondary" th:href="@{/update/{id}(id=${message.id})}">Update</a>
+                        <a class="btn btn-danger" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
+                    </span>
+                </div>
+                <div class="card-footer text-muted pt-2">
+                    <label for="posted">Posted On: </label>
+                    <small id="posted" th:text="${message.postedDate}"></small>
+                    <label for="by">By: </label>
+                    <a id="by" th:text="${message.postedBy}" th:href="@{/profile/{id}(id=${message.authorId})}"></a>
+                </div>
+            </div>
+        </div>
+        <div class="col-3"></div>
+    </div>
 </div>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

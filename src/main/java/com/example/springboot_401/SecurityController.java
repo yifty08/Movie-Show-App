@@ -1,20 +1,24 @@
 package com.example.springboot_401;
 
+import com.cloudinary.utils.ObjectUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
+import java.io.IOException;
+import java.util.Map;
 
 @Controller
 public class SecurityController {
     @Autowired
     private UserService userService;
+
+    @Autowired
+    CloudinaryConfig cloudc;
 
     @GetMapping("/register")
     public String showRegistrationPage(Model model){
@@ -23,14 +27,24 @@ public class SecurityController {
     }
 
     @PostMapping("/register")
-    public String processRegistration(@Valid @ModelAttribute("user") User user, BindingResult result,
+    public String processRegistration(@RequestParam("file") MultipartFile file, @Valid @ModelAttribute("user") User user, BindingResult result,
                                       Model model){
         model.addAttribute("user", user);
+        if(file.isEmpty()){
+            return "registration";
+        }
         if (result.hasErrors()){
             return "registration";
         }else{
-            userService.saveUser(user, "AUTHOR");
-            model.addAttribute("message", "User Account Created");
+            try{
+                Map uploadResult = cloudc.upload(file.getBytes(), ObjectUtils.asMap("resourcetype", "auto"));
+                user.setProfileImg(uploadResult.get("url").toString());
+                userService.saveUser(user, "AUTHOR");
+                model.addAttribute("message", "User Account Created");
+            }catch (IOException e){
+                e.printStackTrace();
+                return "redirect:/";
+            }
         }
         return "redirect:/login";
     }
@@ -40,9 +54,8 @@ public class SecurityController {
         return "login";
     }
 
-    @RequestMapping("/secure")
-    public String secure(Model model){
-        model.addAttribute("myuser", userService.getUser());
-        return "secure";
+    @PostMapping("/login")
+    public String proceed(){
+        return "redirect:/";
     }
 }

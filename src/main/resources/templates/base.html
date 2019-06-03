@@ -6,10 +6,13 @@
 </head>
 <body>
 <nav th:fragment="navi" class="nav nav-tabs p-3">
-    <a href="/profile" class="nav-link"><strong>[[${user.firstName}]]</strong></a>
+    <a href="/profile" class="nav-link"  sec:authorize="isAuthenticated()"><strong>[[${user.firstName}]]</strong></a>
     <a href="/" class="nav-link">All Messages</a>
-    <a href="/add" class="nav-link">Add a Message</a><br/>
-    <a href="/logout" class="nav-link ml-auto"><strong>Logout</strong></a>
+    <a href="/add" class="nav-link" sec:authorize="isAuthenticated()">Add a Message</a>
+    <span class=" nav-link ml-auto" sec:authorize="isAnonymous()">
+        <a href="/register">Register</a> | <a href="/login"  >Log In</a>
+    </span>
+    <a href="/logout" class="nav-link ml-auto" sec:authorize="isAuthenticated()"><strong>Logout</strong></a>
 </nav>
 </body>
 </html>
