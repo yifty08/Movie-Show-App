@@ -20,6 +20,9 @@ public class BullhornController {
     MessageRepository messageRepository;
 
     @Autowired
+    UserRepository userRepository;
+
+    @Autowired
     private UserService userService;
 
     @Autowired
@@ -103,5 +106,22 @@ public class BullhornController {
         LocalDateTime now = LocalDateTime.now();
         return dtf.format(now);
     }
+
+    /*
+    * Admin functionality
+    * */
+
+    @RequestMapping("/admin93")
+    public String adminPage(Model model){
+        model.addAttribute("users", userService.userRepository.findAll());
+        return "admin";
+    }
+
+    @RequestMapping("/deleteuser/{id}")
+    public String deleteUser(@PathVariable("id") long id){
+        userRepository.deleteById(id);
+        return "redirect:/admin93";
+    }
+
 
 }

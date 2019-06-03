@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Base Page</title>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-<nav th:fragment="navi" class="nav nav-tabs p-3">
+<nav th:fragment="navi" class="nav nav-tabs p-3" id="navbar">
     <a href="/profile" class="nav-link"  sec:authorize="isAuthenticated()"><strong>[[${user.firstName}]]</strong></a>
     <a href="/" class="nav-link">All Messages</a>
     <a href="/add" class="nav-link" sec:authorize="isAuthenticated()">Add a Message</a>

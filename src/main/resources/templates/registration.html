@@ -8,8 +8,8 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
 </head>
 <body>
-<nav th:replace="base :: nav"></nav>
 <div class="container">
+    <nav th:replace="base :: nav"></nav>
     <div class="mt-5">
     <h4 class="text-center pb-3">New User Registration</h4>
     <form autocomplete="off" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
@@ -54,7 +54,7 @@
             Password
             <strong>
                 <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">Password Error</span>
-                <input class="form-control" type="text" id="password" placeholder="Password" th:field="*{password}"/><br/>
+                <input class="form-control" type="password" id="password" placeholder="Password" th:field="*{password}"/><br/>
             </strong>
         </div>
         <button type="submit" class="btn btn-secondary">Submit</button>
