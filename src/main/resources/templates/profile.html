@@ -11,8 +11,8 @@
 <div class="container">
     <nav th:replace="base :: navi"></nav>
     <div class="jumbotron text-center">
+        <h2 th:inline="text">Welcome back [[${user.firstName}]] [[${user.lastName}]]</h2>
         <img th:src="${user.profileImg}" class="img-thumbnail" width="200px" height="200px"/>
-        <h2 th:inline="text">[[${user.firstName}]] [[${user.lastName}]]</h2>
     </div>
     <div class="row mt-3" th:each="message : ${messages}">
         <div class="col-3"></div>
@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${message.title}"></h5>
                     <p class="card-text" th:text="${message.content}"></p>
-                    <a class="btn btn-secondary" th:href="@{/view/{id}(id=${message.id})}">View</a>
+                    <a class="btn btn-primary" th:href="@{/view/{id}(id=${message.id})}">View</a>
                     <span th:if="${user.id == message.authorId}">
                         <a class="btn btn-secondary" th:href="@{/update/{id}(id=${message.id})}">Update</a>
                         <a class="btn btn-danger" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>

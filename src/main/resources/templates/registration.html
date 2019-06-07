@@ -11,7 +11,7 @@
 <div class="container">
     <nav th:replace="base :: nav"></nav>
     <div class="mt-5">
-    <h4 class="text-center pb-3">New User Registration</h4>
+    <h4 class="text-center pb-3">Sign Up here</h4>
     <form autocomplete="off" th:action="@{/register}" th:object="${user}" method="post" enctype="multipart/form-data">
         <div class="form-group">
             Profile Picture
@@ -57,7 +57,7 @@
                 <input class="form-control" type="password" id="password" placeholder="Password" th:field="*{password}"/><br/>
             </strong>
         </div>
-        <button type="submit" class="btn btn-secondary">Submit</button>
+        <button type="submit" class="btn btn-primary">Submit</button>
     </form>
     </div>
 </div>

@@ -7,14 +7,14 @@
     <link rel="stylesheet" href="css/styles.css"/>
 </head>
 <body>
-<nav th:fragment="navi" class="nav nav-tabs p-3" id="navbar">
-    <img src="https://res.cloudinary.com/dn5oij7hb/image/upload/v1559594918/BullhornImg.png"
-         class="nav-item mr-auto"/>
+<nav th:fragment="navi" class="navbar navbar-dark bg-dark" id="navbar">
+    <!--<img src="https://res.cloudinary.com/dn5oij7hb/image/upload/v1559594918/BullhornImg.png"-->
+         <!--class="nav-item mr-auto"/>-->
     <a href="/profile" class="nav-link"  sec:authorize="isAuthenticated()"><strong>[[${user.firstName}]]</strong></a>
-    <a href="/" class="nav-link">All Messages</a>
-    <a href="/add" class="nav-link" sec:authorize="isAuthenticated()">Add a Message</a>
+    <a href="/" class="nav-link">All Movies and Shows</a>
+    <a href="/add" class="nav-link" sec:authorize="isAuthenticated()">Add Movie or show</a>
     <span class=" nav-link" sec:authorize="isAnonymous()">
-        <a href="/register">Register</a> | <a href="/login">Log In</a>
+        <a href="/register" class="btn btn-success">Sign Up</a>  <a href="/login">Log In</a>
     </span>
     <a href="/logout" class="nav-link" sec:authorize="isAuthenticated()"><strong>Logout</strong></a>
 </nav>

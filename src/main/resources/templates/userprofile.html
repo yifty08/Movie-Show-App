@@ -22,7 +22,7 @@
                 <div class="card-body">
                     <h5 class="card-title" th:text="${message.title}"></h5>
                     <p class="card-text" th:text="${message.content}"></p>
-                    <a class="btn btn-secondary" th:href="@{/view/{id}(id=${message.id})}">View</a>
+                    <a class="btn btn-primary" th:href="@{/view/{id}(id=${message.id})}">View</a>
                     <span th:if="${user.id == message.authorId}">
                         <a class="btn btn-secondary" th:href="@{/update/{id}(id=${message.id})}">Update</a>
                         <a class="btn btn-danger" th:href="@{/delete/{id}(id=${message.id})}">Delete</a>
